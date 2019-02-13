@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+    </head> 
+    <body>
+        <h2>Weekdays:</h2>
+        <h3>Monday</h3>
+        <h3>Tuesday</h3>
+        <h2>Weekend</h2>
+        <h3>Saturday</h3>
+        <h3>Sunday</h3>
+        
+        <div id="box" style="width:100px; height:100px; background:red; position:absolute;"></div>
+        
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $("document").ready(function() {
+                $("h2").css("color","red");
+                $("#box").click(function() {
+                    $("#box").animate({ right:"250px"
+                        
+                    })
+                })
+            })
+        </script>
+    </body>
+</html>
