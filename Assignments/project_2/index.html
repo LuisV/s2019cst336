@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Project 2: Javascript and jQuery</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <h1>Project 3</h1>
+    </header>
+    <hr/>
+    <main>
+        <h2>Pick and choose!</h2>
+
+        <div id="main">
+
+            <div id="name">
+                <p>Your favorite superhero:</p>
+                <input type="text" id="superhero">
+            </div>
+
+            <div id="preference">
+                <p>What programming language is best?</p>
+                <input type="radio" id="c" name="proglanguage">
+                <label for="proglanguage">HTML</label>
+
+                <input type="radio" id="java" name="proglanguage">
+                <label for="proglanguage">CSS</label>
+
+                <input type="radio" id="javascript" name="proglanguage">
+                <label for="proglanguage">Javascript</label>
+
+                <input type="radio" id="assembly" name="proglanguage">
+                <label for="proglanguage">jQuery</label>
+            </div>
+
+            <div id="burger">
+                <p>What burger size do you prefer?</p>
+                <select id="size" name="Burgersize">
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<option value="large">Large</option>
+						<option value="xl">Extra Large</option>
+					</select>
+            </div>
+
+            <p>Choose a time period</p>
+            <div id="from">
+                <p>From date:</p>
+                <input type="date" id="fromDate">
+            </div>
+
+            <div id="to">
+                <p>To date:</p>
+                <input type="date" id="toDate">
+            </div>
+
+            <div id="otherInfo">
+                Anything else you want to share with the browser?
+            </div>
+            <p>
+                <input type="text" id="share">
+            </p>
+
+            <button id="submit">Submit</button>
+        </div>
+
+        <div id="output">
+            <p id="superheroOutput"></p>
+            <p id="proglanguageOutput"></p>
+            <p id="fromOutput"></p>
+            <p id="toOutput"></p>
+            <p id="burgerSizeOutput"></p>
+            <p id="otherInfoOutput"></p>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="javascript.js"></script>
+</body>
+
+</html>
