@@ -1,0 +1,138 @@
+<head>
+    <title>Lab 3: Quiz</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div>
+        <div class="input-group">
+            <label id="header" for="quiz">Quiz: Norway</label>
+
+            <p>When was Norway unified?</p>
+            <div>
+                <input type="radio" id="item0" name="unification" value="1">
+                <label for="item2">872 AD</label>
+
+                <input type="radio" id="item0" name="unification" value="2">
+                <label for="item2">1002 AD</label>
+
+                <input type="radio" id="item0" name="unification" value="3">
+                <label for="item3">1577 AD</label>
+            </div>
+            <img id="img0">
+            <p>What is the capital of Norway?</p>
+            <div> <input type="radio" id="item1" name="capital" value="1">
+                <label for="item1">Stockholm</label>
+
+                <input type="radio" id="item1" name="capital" value="2">
+                <label for="item2">Bergen</label>
+
+                <input type="radio" id="item1" name="capital" value="3">
+                <label for="item3">Oslo</label>
+            </div>
+            <img id="img1">
+            <p>What is the population of Norway?</p>
+
+            <div>
+                <input type="radio" id="item2" name="population" value="1">
+                <label for="item2">5.3 million</label>
+
+                <input type="radio" id="item2" name="population" value="2">
+                <label for="item2">8.4 million</label>
+
+                <input type="radio" id="item2" name="population" value="3">
+                <label for="item3">29.1 million</label>
+            </div>
+            <img id="img2">
+            <p>Where is Norway ranked in the World Happiness report?</p>
+
+            <div>
+                <input type="radio" id="item3" name="happiness" value="1">
+                <label for="item2">1st</label>
+
+                <input type="radio" id="item3" name="happiness" value="2">
+                <label for="item2">2d</label>
+
+                <input type="radio" id="item3" name="happiness" value="3">
+                <label for="item3">12th</label>
+            </div>
+            <img id="img3">
+            <p>Which countries does Norway share its borders with?</p>
+
+            <div>
+                <input type="radio" id="item4" name="borders" value="1">
+                <label for="item2">Germany, Denmark</label>
+
+                <input type="radio" id="item4" name="borders" value="2">
+                <label for="item2">Estonia, Sweden</label>
+
+                <input type="radio" id="item4" name="borders" value="3">
+                <label for="item3">Finland, Russia, Sweden</label>
+            </div>
+            <img id="img4">
+            <p>Where is Norway ranked in the democracy index by Economist Intelligence Unit?</p>
+            <div>
+
+                <input type="radio" id="item5" name="democracy" value="1">
+                <label for="item2">4</label>
+
+                <input type="radio" id="item5" name="democracy" value="2">
+                <label for="item2">1</label>
+
+                <input type="radio" id="item5" name="democracy" value="3">
+                <label for="item3">15</label>
+            </div>
+            <img id="img5">
+
+        </div>
+    </div>
+    <div>
+        <button class="check">Check answers</button>
+    </div>
+    
+    <div id="score">
+        Total score: <span id="total"></span>
+    </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var answers = { q1: 1, q2: 3, q3: 1, q4: 2, q5: 3, q6: 2 }
+        var counter = 0;
+        var totalScore = 0;
+        $(function() {
+            $("button.check").on("click", function(e) {
+                var guessedRadio = [];
+                var sizeOfAnswers = Object.keys(answers).length;
+
+                for (m = 0; m < sizeOfAnswers; m++) {
+                    guessedRadio[m] = $('input[id=\'item' + m + '\']:checked');
+                }
+
+                var guessedQuestion = [];
+                for (i = 0; i < guessedRadio.length; i++) {
+                    guessedQuestion[i] = guessedRadio[i].val();
+                }
+
+                for (var j in answers) {
+                    if (guessedQuestion[counter] == answers[j]) {
+                        $("#img" + counter).attr("src", "correct.jpg");
+                        totalScore++;
+                    }
+                    else {
+                        $("#img" + counter).attr("src", "wrong.png");
+                    }
+                    counter++;
+                }
+                totalScore = totalScore / counter * 100;
+                totalScoreRounded = totalScore.toFixed(0)
+                $("#total").html(totalScoreRounded + "%");
+                if (totalScoreRounded > 90) {
+                    $("body").css('background-image', "url(win.jpg)");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
