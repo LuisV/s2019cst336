@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1> Spring Break Shopping </h1>
+
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Unit <br> Price</th>
+            <th> Quantity </th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>Microfiber Beach Towel</td>
+            <td>$30</td>
+            <td><input id="quant1" type="text"></td>
+            <td id="totalQuant1"></td>
+        </tr>
+
+        <tr>
+            <td>Sunscreen 100SPF, 120ml</td>
+            <td>$10</td>
+            <td><input id="quant2" type="text"></td>
+            <td id="totalQuant2"></td>
+        </tr>
+
+        <tr>
+            <td>Ipanema Flip-flop Sandals </td>
+            <td>$20</td>
+            <td><input id="quant3" type="text"></td>
+            <td id="totalQuant3"></td>
+        </tr>
+
+        <tr>
+            <td>Shipping</td>
+            <td></td>
+            <td></td>
+            <td id="shipping"></td>
+        </tr>
+
+        <tr>
+            <td>Subtotal</td>
+            <td></td>
+            <td></td>
+            <td id="subtotal"></td>
+        </tr>
+
+        <tr>
+            <td>Tax (10%)</td>
+            <td></td>
+            <td></td>
+            <td id="tax"></td>
+        </tr>
+
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td id="total"></td>
+        </tr>
+
+    </table>
+
+    <h3>Shipping & Handling</h3>
+    <select id="shippingAndHandling">
+        <option value="">Select one</option>
+        <option value="$15">Next day delivery: $15.00</option>
+        <option value="$10">Three-day delivery: $10.00</option>
+        <option value="$5">Regular (5-8 days): $5:00</option>
+    </select>
+    <br><br>
+
+    <span>I accept the terms of this purchase.</span>
+    <br>
+    <button id="conf">"CONFIRM PURCHASE"</button>
+
+    <script>
+        $("#quant1").on("change", function() {
+            $("#totalQuant1").html(parseFloat($("#quant1").val()) * 30);
+        })
+
+        $("#quant2").on("change", function() {
+            $("#totalQuant2").html(parseFloat($("#quant2").val()) * 10);
+        })
+
+        $("#quant3").on("change", function() {
+            $("#totalQuant3").html(parseFloat($("#quant3").val()) * 20);
+        })
+
+        $("#shippingAndHandling").on("change", function() {
+            $("#shipping").html($("#shippingAndHandling").val());
+        })
+
+        $("#shippingAndHandling").on("change", function() {
+        })
+    </script>
+</body>
+
+</html>

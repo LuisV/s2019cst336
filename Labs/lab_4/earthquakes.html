@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Weather Map </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ 
+
+    
+</head>
+
+<body>
+   <form class="weather">
+        <div><label>Enter location:</label>
+            <input type="text" id="location" value="marina, ca"></div>
+        <button type="button">Get weather</button>
+        </div>
+    </form>
+    <script>
+        $("form.weather button").on("click", function(e) {
+            $.ajax({
+                type: "get",
+                url: "https://api.openweathermap.org/data/2.5/weather",
+                dataType: "json",
+                data: {
+                    "q": $("#location").val(),
+                    "appid": "2bab9f1a8ecbebfa85350ce461fa3d1c"
+                },
+                success: function(data) {
+                    $("#city").html(`${data.name}, ${data.sys.country}`);
+                    console.log(data);
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>

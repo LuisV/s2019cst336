@@ -15,9 +15,3 @@ $(document).ready(function(){
 		var burgerSize = valueFromList.options[valueFromList.selectedIndex].text;
 		document.getElementById("burgerSizeOutput").innerHTML = "Burger size: " + burgerSize; 
 	}
-	
- 
-	
-	
-
-	
