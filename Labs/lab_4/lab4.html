@@ -30,11 +30,11 @@
   </form>
 
   <script>
-  $("h1").css("text-align","center");
-    $("#submitButton").css({"margin-left":"50%"});
-  $("label").css("padding-right","8px");
-    $("div").css({"padding":"4px"});
-    $("#dummybodyid").css({"width":"50%","margin":"auto"});
+    $("h1").css("text-align", "center");
+    $("#submitButton").css({ "margin-left": "50%" });
+    $("label").css("padding-right", "8px");
+    $("div").css({ "padding": "4px" });
+    $("#dummybodyid").css({ "width": "50%", "margin": "auto" });
     $("#zipCode").change(update);
     $("#state").change(update2);
     $("#username").change(update3);
@@ -54,11 +54,14 @@
           "zip": $("#zipCode").val()
         },
         success: function(data) {
+          console.log(arguments);
+
           if (data != false) {
             $("#updateCity").html(`${data.city}`);
             $("#updateLatitude").html(`${data.latitude}`);
             $("#updateLongitude").html(`${data.longitude}`);
-          } else {
+          }
+          else {
             $("#zipCodeNotFound").html("Zipcode not found");
           }
         },
@@ -74,6 +77,8 @@
           "state": $("#state").val()
         },
         success: function(data) {
+          console.log(arguments);
+
           for (i = 0; i < data.length; i++) {
             $('#updateCounty').append($('<option>').text(data[i].county));
           }

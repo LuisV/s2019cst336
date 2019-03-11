@@ -1,0 +1,160 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>AJAX: Sign Up Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body id="dummybodyid">
+    <h1> Sign Up Form </h1>
+    <form>
+        <fieldset>
+            <legend>Sign Up</legend>
+            <div><label>First Name: </label><input id="firstName" type="text"></div>
+            <div><label>Last Name: </label><input id="lastName" type="text"></div>
+            <div><label>Email: </label><input type="text"></div>
+            <div><label>Phone Number: </label><input type="text"></div>
+            <div><label>Zip Code: </label><input id="zipCode" type="text"><span id="zipCodeNotFound" </span></div>
+            <div><label>City: </label><span id="updateCity"></span></div>
+            <div><label>Latitude: </label><span id="updateLatitude"></span></div>
+            <div><label>Longitude: </label><span id="updateLongitude"></span></div>
+            <div><label>State: </label><input id="state" type="text"></div>
+            <div><label>Select a County: </label><select id="updateCounty"></select></div>
+            <div><label>Desired Username: </label><input id="username" type="text"><span id="usernameSpan"></span></div>
+            <div><label>Password: </label><input id="passwordId" type="text"><span id="passwordSpan"></span></div>
+            <div><label>Type Password Again: </label><input id="passwordRetype" type="password"><span id="passwordRetypeSpan"></span></div>
+            <div><input id="submitButton" type="submit" value="Sign up!"></div>
+        </fieldset>
+    </form>
+
+    <script>
+        // CSS
+        $("h1").css("text-align", "center");
+        $("#submitButton").css({ "margin-left": "50%" });
+        $("label").css("padding-right", "8px");
+        $("div").css({ "padding": "4px" });
+        $("#dummybodyid").css({ "width": "50%", "margin": "auto" });
+        
+        // functions that are called on changes and clicks
+        $("#zipCode").change(update);
+        $("#state").change(update2);
+        $("#username").change(update3);
+        $("#submitButton").on("click", update4);
+        $("#passwordId").click(update5);
+        $("#passwordId").change(update6);
+
+        // Function for the ZIP code field
+        function update() {
+            // First check if the ZIP code value is entered and a number
+            if (isNaN($("#zipCode").val())) {
+                $("#zipCodeNotFound").html("Please enter zipcode");
+                zipCode.focus();
+                return;
+            }
+            // Retrieve the right data that belongs to the entered ZIP code
+            $.ajax({
+                type: "get",
+                url: "http://itcdland.csumb.edu/~milara/ajax/cityInfoByZip.php",
+                dataType: "json",
+                data: {
+                    "zip": $("#zipCode").val()
+                },
+                // Update different fields with the right data
+                success: function(data) {
+                    if (data != false) {
+                        $("#updateCity").html(`${data.city}`);
+                        $("#updateLatitude").html(`${data.latitude}`);
+                        $("#updateLongitude").html(`${data.longitude}`);
+                    }
+                    else {
+                        $("#zipCodeNotFound").html("Zipcode not found");
+                    }
+                },
+            });
+        }
+        // funtion for making the drop down list with counties when the state is entered
+        function update2() {
+            $.ajax({
+                type: "get",
+                url: "http://itcdland.csumb.edu/~milara/ajax/countyList.php",
+                dataType: "json",
+                data: {
+                    "state": $("#state").val()
+                },
+                success: function(data) {
+                    for (i = 0; i < data.length; i++) {
+                        $('#updateCounty').append($('<option>').text(data[i].county));
+                    }
+                }
+            })
+        }
+        // Function for checking if the entered username is taken or not
+        function update3() {
+            $.ajax({
+                type: "get",
+                url: "http://s2019cst336-karl6390.c9users.io/cloned_git/Labs/lab_5/lab5.php",
+                dataType: "json",
+                data: {
+                    "username": $("#username").val()
+                },
+                // Give feedback on username
+                success: function(data) {
+                    if (data[0] == false) {
+                        $('#username').css({ "background-color": "lightgreen" });
+                    }
+                    else {
+                        $('#username').css("background-color", "red")
+                        $('#usernameSpan').html("Username taken");
+                    }
+                }
+            });
+        }
+        // Function for checking whether the two password fields match
+        function update4() {
+            var password1 = $('#passwordId').val();
+            var password2 = $('#passwordRetype').val();
+            if (!password1.length < 8 && password1 === password2) {
+                $("#passwordSpan").html("Passwords must match and be longer that seven characters long.")
+            }
+        }
+        // Function for creating a random password for the user automatically
+        function update5() {
+            $.ajax({
+                type: "get",
+                url: "http://s2019cst336-karl6390.c9users.io/cloned_git/Labs/lab_5/lab5_password.php",
+                dataType: "json",
+                // Fill in the password field with a generated password
+                success: function(data) {
+                    $('#passwordId').val(data[0]);
+                },
+            })
+        }
+        
+        
+         function update6() {
+            $.ajax({
+                type: "post",
+                url: "http://s2019cst336-karl6390.c9users.io/cloned_git/Labs/lab_5/lab5_password.php",
+               dataType: "json",
+                data: {
+                    "password": $('#passwordId').val(),
+                    "username": $('#username').val()
+                },
+                success: function(data) {
+                     console.log(arguments);
+                     console.log(data[0]);
+                    if(data[0] == true) {
+                        $('#passwordSpan').html("Your password cannot contain your username.");
+                    }
+                },
+                complete: function(data,status) { //optional, used for debugging purposes
+            console.log(status);
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
