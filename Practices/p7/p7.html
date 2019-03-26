@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Practice Midterm</title>
+  <style>
+    th, td {
+      border: 1px solid black;
+    }
+    #promoCodeExpiration {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th id="productHeader">Product</th>
+      <th id="unitPriceHeader">Unit Price</th>
+      <th id="quantityHeader">Quantity</th>
+      <th id="totalHeader">Total</th>
+    </tr>
+    <tr>
+      <td id="productName"></td>
+      <td id="unitPrice"></td>
+      <td id="quantity"></td>
+      <td id="totalOriginal"></td>
+    </tr>
+    <tr>
+      <td>
+        <select>
+                  <option></option>
+                  <option></option>
+            </select>
+      </td>
+      <td></td>
+      <td id="quantity2"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Discount</td>
+      <td></td>
+      <td id="discount"></td>
+      <td id="totalAfterDiscount"></td>
+    </tr>
+    <tr>
+      <td>Subtotal</td>
+      <td></td>
+      <td></td>
+      <td id="subTotal"></td>
+    </tr>
+    <tr>
+      <td>Tax (10%)</td>
+      <td></td>
+      <td></td>
+      <td id="tax"></td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td id="total"></td>
+    </tr>
+  </table>
+  <b>Promo Code: </b>
+  <input type="text" name="" />
+  <div id="promoCodeExpiration">
+      The Promo Code expires on !
+  </div>
+  
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+
+        $(document).ready(function(e) {
+            $.ajax({
+                type: "GET",
+                url: "practiceMidterm.php",
+              //  dataType: "json",
+                data: {},
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(err) {
+                    console.log("error", arguments);
+                },
+                complete: function(data, status) {
+                    // Called whether success or error
+                    //console.log(status);
+                }
+            });
+        });
+    
+$opt = [
+PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+PDO::ATTR_EMULATE_PREPARES => false,
+];
+
+  </script>
+</body>
+
+</html>
